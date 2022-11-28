@@ -2,7 +2,6 @@
   height: 50px;
   background-size: cover; /*ocupe el tamaño del div que tiene*/
   background-position: center top;
-  padding: 15%;
   display: flex;
 }
 

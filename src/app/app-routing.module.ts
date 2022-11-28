@@ -5,7 +5,7 @@ import { TableCocktailComponent } from './table-cocktail/table-cocktail.componen
 
 const routes: Routes = [
   {
-    path: 'details',
+    path: 'details/:id',
     component: HomeComponent,
   },
   {

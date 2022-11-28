@@ -10,8 +10,23 @@ import { CocktailService } from '../services/cocktail.service';
 })
 export class TableCocktailComponent implements OnInit {
   public drinks: any[] = [];
+  public ingredients: any[] = [];
+  public ingredient: boolean = false;
+  public lstCategories: any[] = [];
+  public selectCategory = '';
+
   searchField = new FormControl();
+  searchBy = new FormControl();
+
   public results: any;
+  public seleccionado = '';
+  public showSelect = true;
+  //select
+  lista: string[] = [
+    'search by name',
+    'search by first letter',
+    'Search ingredient by name',
+  ];
 
   constructor(private _cocktailService: CocktailService) {}
 
@@ -22,17 +37,41 @@ export class TableCocktailComponent implements OnInit {
       .subscribe((value) => {
         this.getData(value);
       });
+    this.getCategories();
   }
 
   private getData(query: string) {
-    this._cocktailService.search(query).subscribe((data: any) => {
-      this.drinks = data.drinks;
-    });
+    let filter = '';
+    if (this.seleccionado === 'search by name') {
+      filter = 's';
+      this._cocktailService.search(query, filter).subscribe((data: any) => {
+        this.drinks = data.drinks;
+      });
+    }
+    if (this.seleccionado === 'search by first letter') {
+      filter = 'f';
+      this._cocktailService.search(query, filter).subscribe((data: any) => {
+        this.drinks = data.drinks;
+      });
+    }
+    if (this.seleccionado === 'Search ingredient by name') {
+      this.ingredient = true;
+      filter = 'i';
+      this._cocktailService.search(query, filter).subscribe((data: any) => {
+        this.ingredients = data.ingredients;
+      });
+    }
   }
 
   getDrinks() {
     this._cocktailService.getRamdonDrink().subscribe((res: any) => {
       this.drinks = res.drinks;
+    });
+  }
+
+  getCategories() {
+    this._cocktailService.getCategories().subscribe((res: any) => {
+      this.lstCategories = res.drinks.map((item: any) => item.strCategory);
     });
   }
 }

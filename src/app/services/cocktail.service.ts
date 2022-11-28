@@ -11,11 +11,22 @@ export class CocktailService {
 
   constructor(private http: HttpClient) {}
 
+  getOneDrink(id: string) {
+    return this.http.get(`${this.apiUrl}/lookup.php?i=${id}`);
+  }
+
   getRamdonDrink() {
     return this.http.get(`${this.apiUrl}/random.php`);
   }
 
-  search(query: string) {
-    return this.http.get(`${this.apiUrl}/search.php?s=${query}`);
+  search(query: string, filter: string) {
+    if (filter === undefined || filter === null) {
+      filter = 's';
+    }
+    return this.http.get(`${this.apiUrl}/search.php?${filter}=${query}`);
+  }
+
+  getCategories() {
+    return this.http.get(`${this.apiUrl}/list.php?c=list`);
   }
 }

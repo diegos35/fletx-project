@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { TableCocktailComponent } from './table-cocktail/table-cocktail.component';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent, HomeComponent, TableCocktailComponent],
   imports: [
@@ -15,6 +17,7 @@ import { TableCocktailComponent } from './table-cocktail/table-cocktail.componen
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,5 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CocktailService } from 'src/app/services/cocktail.service';
+import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +11,31 @@ import { CocktailService } from 'src/app/services/cocktail.service';
 })
 export class HomeComponent implements OnInit {
   public drink: any;
+  public drinkId: string | null = null;
 
-  constructor(private _cocktailService: CocktailService) {}
+  constructor(
+    private _cocktailService: CocktailService,
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
-  async ngOnInit() {
-    await this.fethcDrink();
+  ngOnInit() {
+    this.route.params
+      .pipe(
+        switchMap((params) => {
+          this.drinkId = params['id'];
+          if (this.drinkId) {
+            return this._cocktailService.getOneDrink(this.drinkId);
+          }
+          return [null];
+        })
+      )
+      .subscribe((data: any) => {
+        this.drink = data.drinks[0];
+      });
   }
 
-  fethcDrink() {
-    this._cocktailService.getRamdonDrink().subscribe((res: any) => {
-      this.drink = res.drinks[0];
-      console.log(this.drink);
-    });
+  goToBack() {
+    this.location.back();
   }
 }

@@ -1,9 +1,39 @@
+<h1 style="text-align: center">Drinks</h1>
 <div class="container">
-  <div class="btn-add">
-    <input type="search" [formControl]="searchField" />
+  <div class="search">
+    <label for="selectoption"
+      >Filter by name, first or first ingredient name</label
+    >
+    <p>
+      <select
+        name="selectoption"
+        [(ngModel)]="seleccionado"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option [value]="item" *ngFor="let item of lista">
+          {{ item }}
+        </option>
+      </select>
+    </p>
+    <!-- select categories -->
+    <label for="">Category</label>
+    <p>
+      <select
+        name="selectcategory"
+        [(ngModel)]="selectCategory"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option [value]="item" *ngFor="let item of lstCategories">
+          {{ item }}
+        </option>
+      </select>
+    </p>
+    <input type="search" [formControl]="searchField" placeholder="Search ..." />
   </div>
   <table class="table">
-    <thead>
+    <thead *ngIf="!ingredient">
       <tr>
         <th>Drink</th>
         <th>Tags</th>
@@ -14,8 +44,17 @@
         <th>Detail</th>
       </tr>
     </thead>
+    <thead *ngIf="ingredient">
+      <tr>
+        <th>ABV</th>
+        <th>Alcohol</th>
+        <th>Description</th>
+        <th>Ingredient</th>
+        <th>Type</th>
+      </tr>
+    </thead>
 
-    <tbody data-test-id="records-body">
+    <tbody data-test-id="records-body" *ngIf="!ingredient">
       <tr *ngFor="let item of drinks">
         <td>{{ item?.strDrink }}</td>
         <td>{{ item?.strTags }}</td>
@@ -23,7 +62,21 @@
         <td>{{ item?.strAlcoholic }}</td>
         <td>{{ item?.strGlass }}</td>
         <td>{{ item?.strInstructions }}</td>
-        <th><button class="btn-show">Show</button></th>
+        <th>
+          <a routerLinkActive="active" [routerLink]="['/details', item.idDrink]"
+            >Show</a
+          >
+        </th>
+      </tr>
+    </tbody>
+
+    <tbody data-test-id="records-body" *ngIf="ingredient">
+      <tr *ngFor="let item of ingredients">
+        <td>{{ item?.strABV }}</td>
+        <td>{{ item?.strAlcohol }}</td>
+        <td>{{ item?.strDescription }}</td>
+        <td>{{ item?.strIngredient }}</td>
+        <td>{{ item?.strType }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,13 +1,44 @@
+<button
+  type="button"
+  style="margin: 10px"
+  class="btn btn-primary"
+  (click)="goToBack()"
+>
+  Back
+</button>
 <div class="container">
   <div class="product">
     <div class="content">
       <div class="img_content">
-        <!-- <img src="images/box1.png" alt=""> -->
         <img [src]="drink?.strDrinkThumb" alt="" />
       </div>
       <h1>{{ drink?.strDrink }}</h1>
       <p>{{ drink?.strCategory }}</p>
-      <button href="#" class="main_button">Lo quiero</button>
+      <p>{{ drink?.strAlcoholic }}</p>
+      <p>{{ drink?.strGlass }}</p>
+      <p>{{ drink?.strTags }}</p>
+      <div class="ingredientes">
+        <h3>Ingredients</h3>
+        <p>{{ drink?.strIngredient1 }}</p>
+        <p>{{ drink?.strIngredient2 }}</p>
+        <p>{{ drink?.strIngredient3 }}</p>
+        <p>{{ drink?.strIngredient4 }}</p>
+        <p>{{ drink?.strIngredient5 }}</p>
+        <p>{{ drink?.strIngredient6 }}</p>
+      </div>
+      <div>
+        <h3>Measure</h3>
+        <p>{{ drink?.strMeasure1 }}</p>
+        <p>{{ drink?.strMeasure2 }}</p>
+        <p>{{ drink?.strMeasure3 }}</p>
+        <p>{{ drink?.strMeasure4 }}</p>
+        <p>{{ drink?.strMeasure5 }}</p>
+        <p>{{ drink?.strMeasure6 }}</p>
+      </div>
+      <div>
+        <h3>Instructions</h3>
+        <p>{{ drink?.strInstructions }}</p>
+      </div>
     </div>
   </div>
 </div>
