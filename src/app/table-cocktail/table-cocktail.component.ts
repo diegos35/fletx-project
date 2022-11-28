@@ -18,6 +18,9 @@ export class TableCocktailComponent implements OnInit {
   searchField = new FormControl();
   searchBy = new FormControl();
 
+  public disableCategory: boolean = false;
+  public disableOption: boolean = false;
+
   public results: any;
   public seleccionado = '';
   public showSelect = true;
@@ -40,7 +43,7 @@ export class TableCocktailComponent implements OnInit {
     this.getCategories();
   }
 
-  private getData(query: string) {
+  public getData(query: string) {
     let filter = '';
     if (this.seleccionado === 'search by name') {
       filter = 's';
@@ -73,5 +76,24 @@ export class TableCocktailComponent implements OnInit {
     this._cocktailService.getCategories().subscribe((res: any) => {
       this.lstCategories = res.drinks.map((item: any) => item.strCategory);
     });
+  }
+
+  onSelectOption(value: any) {
+    if (value === 'selectOption') {
+      this.disableCategory = true;
+    } else {
+      this.disableOption = true;
+    }
+  }
+
+  SearchCategory() {
+    if (this.selectCategory) {
+      console.log(this.selectCategory);
+      this._cocktailService
+        .search(this.selectCategory, 'c')
+        .subscribe((data: any) => {
+          this.drinks = data.drinks;
+        });
+    }
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,12 @@ export class CocktailService {
     if (filter === undefined || filter === null) {
       filter = 's';
     }
-    return this.http.get(`${this.apiUrl}/search.php?${filter}=${query}`);
+    let searchword = 'search';
+    if (filter === 'c') {
+      searchword = 'filter';
+      query = query.split(' ').join('_');
+    }
+    return this.http.get(`${this.apiUrl}/${searchword}.php?${filter}=${query}`);
   }
 
   getCategories() {

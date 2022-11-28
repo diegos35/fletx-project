@@ -10,6 +10,8 @@
         [(ngModel)]="seleccionado"
         class="form-select"
         aria-label="Default select example"
+        (change)="onSelectOption('selectOption')"
+        [disabled]="disableOption"
       >
         <option [value]="item" *ngFor="let item of lista">
           {{ item }}
@@ -24,13 +26,28 @@
         [(ngModel)]="selectCategory"
         class="form-select"
         aria-label="Default select example"
+        [disabled]="disableCategory"
+        (change)="onSelectOption('selectCategory')"
       >
         <option [value]="item" *ngFor="let item of lstCategories">
           {{ item }}
         </option>
       </select>
     </p>
-    <input type="search" [formControl]="searchField" placeholder="Search ..." />
+    <button
+      type="button"
+      class="btn btn-primary"
+      *ngIf="selectCategory"
+      (click)="SearchCategory()"
+    >
+      Search
+    </button>
+    <input
+      type="search"
+      [formControl]="searchField"
+      placeholder="Search ..."
+      *ngIf="!selectCategory"
+    />
   </div>
   <table class="table">
     <thead *ngIf="!ingredient">
