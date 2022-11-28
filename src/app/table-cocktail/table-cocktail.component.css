@@ -1,0 +1,66 @@
+.table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+.table th,
+table td {
+  font-size: 16px;
+  padding: 8px;
+}
+
+.table thead th {
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #ddd;
+}
+
+.table tbody tr:hover {
+  background-color: #eeeeee;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.btn-add {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-show {
+  background-color: #7acc2d;
+  width: 100%;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+/* Simple CSS for flexbox table on mobile */
+@media (max-width: 800px) {
+  table thead {
+    left: -9999px;
+    position: absolute;
+    visibility: hidden;
+  }
+  table tr {
+    border-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  table td {
+    border: 1px solid;
+    margin: 0 -1px -1px 0;
+    padding-top: 35px;
+    position: relative;
+    width: 50%;
+  }
+  table td span {
+    display: block;
+  }
+}

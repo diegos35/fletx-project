@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="btn-add">
+    <input type="search" [formControl]="searchField" />
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Drink</th>
+        <th>Tags</th>
+        <th>Category</th>
+        <th>Alcoholic</th>
+        <th>Glass</th>
+        <th>Instructions</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+
+    <tbody data-test-id="records-body">
+      <tr *ngFor="let item of drinks">
+        <td>{{ item?.strDrink }}</td>
+        <td>{{ item?.strTags }}</td>
+        <td>{{ item?.strCategory }}</td>
+        <td>{{ item?.strAlcoholic }}</td>
+        <td>{{ item?.strGlass }}</td>
+        <td>{{ item?.strInstructions }}</td>
+        <th><button class="btn-show">Show</button></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
